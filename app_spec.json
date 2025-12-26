@@ -1,0 +1,33 @@
+{
+    "appName": "soul-verse",
+    "displayName": "SoulVerse",
+    "oneLiner": "Versículos bíblicos de conforto baseados no seu estado emocional.",
+    "problem": "Dificuldade em encontrar passagens bíblicas específicas para conforto emocional imediato.",
+    "targetUser": "Pessoas buscando conforto espiritual rápido e contextualizado.",
+    "primaryIntent": "get_comfort_verse",
+    "primaryWorkflows": [
+        "Consultar versículo por sentimento"
+    ],
+    "entities": [
+        "Versículo",
+        "Sentimento"
+    ],
+    "nonGoals": [
+        "Plano de leitura anual",
+        "Estudo teológico profundo",
+        "Rede social de oração",
+        "Login/Auth"
+    ],
+    "constraints": [
+        "Usar API pública gratuita (bible-api.com)",
+        "Tradução Almeida (ou similar disponível em PT)"
+    ],
+    "integrations": [
+        "bible-api.com"
+    ],
+    "privacyNotes": "Nenhum dado pessoal persistido. Sentimento usado apenas para consulta.",
+    "submissionAssetsPlan": [
+        "Screenshot do card de versículo renderizado",
+        "Screenshot do fluxo de entrada (usuário descrevendo sentimento)"
+    ]
+}

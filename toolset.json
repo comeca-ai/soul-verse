@@ -1,0 +1,36 @@
+{
+    "tools": [
+        {
+            "name": "get_bible_verse",
+            "description": "Busca o texto oficial completo de uma passagem bíblica baseada em sua referência (Livro Capítulo:Versículo). Use para garantir a precisão do texto sagrado ao citar a Bíblia.",
+            "inputSchema": {
+                "type": "object",
+                "properties": {
+                    "reference": {
+                        "type": "string",
+                        "description": "A referência bíblica no formato 'Livro Capítulo:Versículo' (ex: 'João 3:16', 'Salmos 23:1'). Para livros com nome composto, use o padrão comum (ex: '1 Pedro')."
+                    },
+                    "translation": {
+                        "type": "string",
+                        "description": "A versão da tradução. Use 'almeida' para português.",
+                        "default": "almeida",
+                        "enum": [
+                            "almeida"
+                        ]
+                    }
+                },
+                "required": [
+                    "reference"
+                ],
+                "additionalProperties": false
+            },
+            "hints": {
+                "readOnly": true,
+                "consequenceFree": true
+            },
+            "capabilities": {
+                "widgetAccessible": true
+            }
+        }
+    ]
+}

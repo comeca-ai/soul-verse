@@ -1,0 +1,30 @@
+[
+    {
+        "name": "explicit_sadness",
+        "prompt": "Estou me sentindo muito triste e sozinho hoje.",
+        "shouldCallTool": "get_bible_verse",
+        "expectedReferencePattern": "(Salmos|Mateus|João|Isaías)"
+    },
+    {
+        "name": "anxiety_future",
+        "prompt": "Tenho uma entrevista de emprego amanhã e estou paralisado de ansiedade.",
+        "shouldCallTool": "get_bible_verse",
+        "expectedReferencePattern": "(Filipenses|Josué|1 Pedro)"
+    },
+    {
+        "name": "gratitude",
+        "prompt": "Hoje aconteceu algo maravilhoso, quero agradecer a Deus.",
+        "shouldCallTool": "get_bible_verse",
+        "expectedReferencePattern": "(Salmos|1 Tessalonicenses|Efésios)"
+    },
+    {
+        "name": "negative_recipe",
+        "prompt": "Me dê uma receita de bolo de cenoura.",
+        "shouldCallTool": null
+    },
+    {
+        "name": "negative_weather",
+        "prompt": "Vai chover hoje?",
+        "shouldCallTool": null
+    }
+]
