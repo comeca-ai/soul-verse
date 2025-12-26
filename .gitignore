@@ -1,7 +1,10 @@
-node_modules
-.DS_Store
-dist
+__pycache__/
+*.py[cod]
+*$py.class
+native/
+.venv/
+venv/
 .env
-coverage
 web/node_modules
 web/dist
+.DS_Store
