@@ -76,12 +76,14 @@ server.addTool({
 });
 
 // Start server with HTTP Streaming transport (enables SSE at /sse for ChatGPT)
+const PORT = process.env.PORT ? parseInt(process.env.PORT) : 8080;
+
 server.start({
     transportType: "httpStream",
     httpStream: {
-        port: 8080,
+        port: PORT,
     },
 }).then(() => {
     console.log("SoulVerse Server running on HTTP/SSE transport");
-    console.log("SSE Endpoint: http://localhost:8080/sse");
+    console.log(`SSE Endpoint: http://localhost:${PORT}/sse`);
 });
