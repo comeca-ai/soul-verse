@@ -1,37 +1,46 @@
 # SoulVerse
 
-Seu assistente de conforto espiritual diário.
+SoulVerse e um app MCP com widget para trazer versiculos biblicos de conforto com texto preciso, baseado no sentimento do usuario ou em uma referencia explicita.
 
-## Como rodar o projeto
+## O que o app faz
 
-### Pré-requisitos
-- Node.js 18+
-- NPM
-- Ngrok (para testes com ChatGPT Developer Mode)
+- busca um versiculo de conforto a partir do sentimento informado
+- busca o texto exato de uma referencia biblica explicita
+- exibe o resultado em um card visual no widget
 
-### 1. Servidor MCP (Backend)
+## Estrutura real do repositorio
+
+- `server.py`: MCP server em Python com as tools
+- `web/`: widget React/Vite
+- `toolset.json`: definicao das tools
+- `app_spec.json`: especificacao original do app
+
+## Como rodar o backend
+
 ```bash
-cd server
+cd /root/soul-verse
+python3 -m venv .venv
+. .venv/bin/activate
+pip install -r requirements.txt
+python server.py
+```
+
+## Como rodar o widget
+
+```bash
+cd /root/soul-verse/web
 npm install
 npm run dev
 ```
-O servidor rodará na porta **8080** com suporte a SSE.
 
-**Para testar no ChatGPT:**
-1. Rode o ngrok: `ngrok http 8080`
-2. Copie a URL gerada (ex: `https://abcd.ngrok-free.app`)
-3. No ChatGPT Developer Mode, use a URL: `https://abcd.ngrok-free.app/sse`
+## Estado atual do MVP
 
-### 2. Widget (Frontend)
-```bash
-cd web
-npm install
-npm run dev
-```
-Acesse `http://localhost:5173` para ver o preview do card (com dados mockados).
+- tool principal: `get_comfort_verse`
+- tool secundaria: `get_bible_verse`
+- widget com leitura de `window.openai.toolOutput` e fallback local para preview
 
-## Estrutura
-- `/server`: Código do MCP Server (Logic & Tools)
-- `/web`: Código do Widget React (UI)
-- `app_spec.json`: Especificação do App
-- `toolset.json`: Definição de Tools para registro
+## Observacoes
+
+- o app depende de `bible-api.com` para obter o texto biblico exato
+- a traducao atual suportada e `almeida`
+- o app nao substitui apoio pastoral, psicologico ou medico

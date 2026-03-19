@@ -1,36 +1,68 @@
 {
-    "tools": [
-        {
-            "name": "get_bible_verse",
-            "description": "Busca o texto oficial completo de uma passagem bíblica baseada em sua referência (Livro Capítulo:Versículo). Use para garantir a precisão do texto sagrado ao citar a Bíblia.",
-            "inputSchema": {
-                "type": "object",
-                "properties": {
-                    "reference": {
-                        "type": "string",
-                        "description": "A referência bíblica no formato 'Livro Capítulo:Versículo' (ex: 'João 3:16', 'Salmos 23:1'). Para livros com nome composto, use o padrão comum (ex: '1 Pedro')."
-                    },
-                    "translation": {
-                        "type": "string",
-                        "description": "A versão da tradução. Use 'almeida' para português.",
-                        "default": "almeida",
-                        "enum": [
-                            "almeida"
-                        ]
-                    }
-                },
-                "required": [
-                    "reference"
-                ],
-                "additionalProperties": false
-            },
-            "hints": {
-                "readOnly": true,
-                "consequenceFree": true
-            },
-            "capabilities": {
-                "widgetAccessible": true
-            }
-        }
-    ]
+  "tools": [
+    {
+      "name": "get_comfort_verse",
+      "description": "Seleciona uma referencia biblica apropriada para o sentimento descrito pelo usuario, consulta o texto exato em uma API biblica publica e retorna um payload pronto para exibir no widget.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "feeling": {
+            "type": "string",
+            "description": "Descricao curta de como o usuario esta se sentindo, por exemplo: 'estou ansioso', 'estou triste', 'me sentindo sozinho'."
+          },
+          "translation": {
+            "type": "string",
+            "description": "Traducao biblica. Atualmente use 'almeida'.",
+            "default": "almeida",
+            "enum": [
+              "almeida"
+            ]
+          }
+        },
+        "required": [
+          "feeling"
+        ],
+        "additionalProperties": false
+      },
+      "hints": {
+        "readOnly": true,
+        "consequenceFree": true
+      },
+      "capabilities": {
+        "widgetAccessible": true
+      }
+    },
+    {
+      "name": "get_bible_verse",
+      "description": "Busca o texto oficial de uma referencia biblica explicita e retorna um payload pronto para o widget.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "reference": {
+            "type": "string",
+            "description": "Referencia biblica no formato 'Livro Capitulo:Versiculo', por exemplo: 'Salmos 23:1' ou 'Joao 3:16'."
+          },
+          "translation": {
+            "type": "string",
+            "description": "Traducao biblica. Atualmente use 'almeida'.",
+            "default": "almeida",
+            "enum": [
+              "almeida"
+            ]
+          }
+        },
+        "required": [
+          "reference"
+        ],
+        "additionalProperties": false
+      },
+      "hints": {
+        "readOnly": true,
+        "consequenceFree": true
+      },
+      "capabilities": {
+        "widgetAccessible": true
+      }
+    }
+  ]
 }

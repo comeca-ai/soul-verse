@@ -1,72 +1,134 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 interface VerseCardProps {
-    reference: string;
-    text: string;
-    book: string;
-    chapter: string;
-    verse: string;
+  heading: string;
+  subheading: string;
+  reference: string;
+  text: string;
+  book: string;
+  chapter: string;
+  verse: string;
+  themeColor?: string;
+  reflection: string;
+  followUp?: string;
+  feeling: string;
+  translation?: string;
 }
 
-export const VerseCard: React.FC<VerseCardProps> = ({ reference, text, book, chapter, verse }) => {
-    const [copied, setCopied] = useState(false);
+export function VerseCard({
+  heading,
+  subheading,
+  reference,
+  text,
+  book,
+  chapter,
+  verse,
+  themeColor = '#7c3aed',
+  reflection,
+  followUp,
+  feeling,
+  translation,
+}: VerseCardProps) {
+  const [copied, setCopied] = useState(false);
 
-    const handleCopy = () => {
-        navigator.clipboard.writeText(`${text} (${reference})`);
-        setCopied(true);
-        setTimeout(() => setCopied(false), 2000);
-    };
+  async function handleCopy() {
+    try {
+      await navigator.clipboard.writeText(`${text} (${reference})`);
+      setCopied(true);
+      window.setTimeout(() => setCopied(false), 1800);
+    } catch {
+      setCopied(false);
+    }
+  }
 
-    return (
-        <div className="max-w-md mx-auto my-4 p-8 bg-white rounded-xl shadow-lg border border-gray-100 fade-in relative overflow-hidden">
-            {/* Detalhe decorativo no topo */}
-            <div className="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-300 via-purple-300 to-indigo-300 opacity-50"></div>
-
-            {/* Ícone sutil de aspas */}
-            <div className="absolute top-6 left-6 text-gray-100 font-serif text-6xl leading-none select-none opacity-50">
-                “
-            </div>
-
-            <div className="relative z-10 text-center">
-                {/* Texto Bíblico */}
-                <p className="font-serif text-xl sm:text-2xl text-gray-800 leading-relaxed mb-6 italic">
-                    {text}
-                </p>
-
-                {/* Referência */}
-                <div className="flex flex-col items-center">
-                    <span className="text-xs uppercase tracking-widest text-gray-500 font-semibold mb-1">
-                        {book} {chapter}:{verse}
-                    </span>
-                    <div className="h-px w-12 bg-indigo-200 my-2"></div>
-                </div>
-
-                {/* Ações */}
-                <div className="mt-6 flex justify-center">
-                    <button
-                        onClick={handleCopy}
-                        className={`
-              flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all duration-300
-              ${copied
-                                ? 'bg-green-50 text-green-700 ring-1 ring-green-200'
-                                : 'bg-gray-50 text-gray-600 hover:bg-indigo-50 hover:text-indigo-600'}
-            `}
-                        aria-label="Copiar versículo"
-                    >
-                        {copied ? (
-                            <>
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" /></svg>
-                                <span>Copiado</span>
-                            </>
-                        ) : (
-                            <>
-                                <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3" /></svg>
-                                <span>Copiar</span>
-                            </>
-                        )}
-                    </button>
-                </div>
-            </div>
+  return (
+    <article className="w-full overflow-hidden rounded-[30px] border border-white/70 bg-white/88 shadow-[0_24px_90px_rgba(76,29,149,0.12)] backdrop-blur">
+      <div
+        className="relative overflow-hidden px-7 pb-7 pt-8 text-white"
+        style={{
+          background: `linear-gradient(135deg, ${themeColor} 0%, #1d4ed8 100%)`,
+        }}
+      >
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,_rgba(255,255,255,0.24),_transparent_36%)]" />
+        <div className="relative">
+          <p className="mb-3 text-[11px] font-semibold uppercase tracking-[0.32em] text-white/80">
+            SoulVerse
+          </p>
+          <h1 className="max-w-xl text-3xl font-semibold leading-tight sm:text-[2.35rem]">
+            {heading}
+          </h1>
+          <p className="mt-3 max-w-2xl text-sm leading-6 text-white/86 sm:text-base">
+            {subheading}
+          </p>
         </div>
-    );
-};
+      </div>
+
+      <div className="space-y-6 px-7 py-7">
+        <section className="grid gap-3 rounded-[24px] border border-slate-200 bg-slate-50/80 p-5 sm:grid-cols-3">
+          <div>
+            <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500">
+              Sentimento
+            </p>
+            <p className="text-sm font-medium text-slate-900">{feeling}</p>
+          </div>
+          <div>
+            <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500">
+              Referencia
+            </p>
+            <p className="text-sm font-medium text-slate-900">{reference}</p>
+          </div>
+          <div>
+            <p className="mb-1 text-[11px] font-semibold uppercase tracking-[0.24em] text-slate-500">
+              Traducao
+            </p>
+            <p className="text-sm font-medium text-slate-900">
+              {(translation || 'almeida').toUpperCase()}
+            </p>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden rounded-[28px] border border-slate-200 bg-white p-7 shadow-[0_10px_30px_rgba(15,23,42,0.05)]">
+          <div className="absolute left-6 top-4 text-7xl leading-none text-slate-100">“</div>
+          <div className="relative">
+            <p className="font-serif text-[1.35rem] leading-9 text-slate-800 sm:text-[1.55rem]">
+              {text}
+            </p>
+            <div className="mt-6 flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-slate-600">
+                {book} {chapter}:{verse}
+              </span>
+              <button
+                type="button"
+                onClick={handleCopy}
+                className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                  copied
+                    ? 'bg-emerald-50 text-emerald-700 ring-1 ring-emerald-200'
+                    : 'bg-slate-900 text-white hover:bg-slate-800'
+                }`}
+              >
+                {copied ? 'Copiado' : 'Copiar versiculo'}
+              </button>
+            </div>
+          </div>
+        </section>
+
+        <section className="grid gap-4 sm:grid-cols-[1.2fr_0.8fr]">
+          <div className="rounded-[24px] border border-slate-200 bg-white p-5">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">
+              Reflexao
+            </p>
+            <p className="text-sm leading-7 text-slate-700">{reflection}</p>
+          </div>
+          <div className="rounded-[24px] border border-slate-200 bg-slate-50/80 p-5">
+            <p className="mb-2 text-[11px] font-semibold uppercase tracking-[0.28em] text-slate-500">
+              Continuacao
+            </p>
+            <p className="text-sm leading-7 text-slate-700">
+              {followUp || 'Posso trazer outro versiculo relacionado, se quiser.'}
+            </p>
+          </div>
+        </section>
+      </div>
+    </article>
+  );
+}
